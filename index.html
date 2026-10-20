@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Pull It — Tabletop Cloth Whip Game</title>
+  <link rel="stylesheet" href="./styles.css?v=7" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top HUD Bar -->
+    <header class="hud-top">
+      <div class="hud-stats">
+        <div class="stat-pill">
+          <span class="stat-label">PULLS</span>
+          <span class="stat-value" id="hud-score">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">BEST</span>
+          <span class="stat-value" id="hud-best">0</span>
+        </div>
+        <div class="stat-pill stat-pill-subtle">
+          <span class="stat-label">ITEMS</span>
+          <span class="stat-value" id="hud-count">1</span>
+        </div>
+      </div>
+
+      <div class="hud-controls">
+        <button type="button" class="icon-btn" id="btn-pause" aria-label="Pause Game">⏸ Pause</button>
+        <button type="button" class="icon-btn" id="btn-mute" aria-label="Toggle Sound" aria-pressed="false">🔊 Sound</button>
+        <button type="button" class="icon-btn" id="btn-motion" aria-label="Toggle Reduced Motion" aria-pressed="false">✨ Motion: Full</button>
+        <button type="button" class="icon-btn icon-btn-dev" id="btn-dev" title="Toggle Developer Panel (D)">🛠 Dev</button>
+      </div>
+    </header>
+
+    <!-- One-line First-Run Instruction -->
+    <div class="instruction-banner" id="first-run-hint">
+      Swipe the cloth away. Keep everything standing.
+    </div>
+
+    <!-- Play Surface -->
+    <main class="play-stage">
+      <canvas id="game-canvas" aria-label="Pull It tabletop game surface"></canvas>
+
+      <!-- Subtle praise badge for close calls (never obscures main score) -->
+      <div class="praise-badge" id="praise-badge" hidden>Clean pull!</div>
+
+      <!-- Feedback toast for cancelled taps or failure cause -->
+      <div class="status-toast" id="status-toast" role="status" aria-live="polite" hidden></div>
+
+      <!-- Title Overlay -->
+      <section class="overlay-card" id="modal-title" aria-labelledby="title-heading">
+        <h1 id="title-heading">Pull It</h1>
+        <p class="overlay-subtitle">Swipe the cloth away. Keep everything standing.</p>
+        <p class="overlay-note">
+          Every surviving object stays exactly where it settles for the next pull.
+        </p>
+        <button type="button" class="primary-btn" id="btn-start">Start Run</button>
+      </section>
+
+      <!-- Pause Overlay -->
+      <section class="overlay-card" id="modal-pause" aria-labelledby="pause-heading" hidden>
+        <h2 id="pause-heading">Paused</h2>
+        <p class="overlay-subtitle">Take a breath before the next pull.</p>
+        <div class="overlay-btn-group">
+          <button type="button" class="primary-btn" id="btn-resume">Resume</button>
+          <button type="button" class="secondary-btn" id="btn-restart-pause">Restart Run</button>
+        </div>
+      </section>
+
+      <!-- Game Over / Table Full Overlay -->
+      <section class="overlay-card" id="modal-gameover" aria-labelledby="gameover-title" hidden>
+        <h2 id="gameover-title">Tipped Over!</h2>
+        <p class="overlay-reason" id="gameover-reason">Stemless Glass tipped over!</p>
+        <div class="score-summary">
+          <div>
+            <span class="summary-label">RUN SCORE</span>
+            <strong class="summary-val" id="final-score">0</strong>
+          </div>
+          <div>
+            <span class="summary-label">BEST SCORE</span>
+            <strong class="summary-val" id="final-best">0</strong>
+          </div>
+        </div>
+        <button type="button" class="primary-btn" id="btn-retry">Retry Immediately</button>
+      </section>
+    </main>
+
+    <!-- Developer Telemetry & Tuning Panel (Toggled via 'D' key, ?debug=1, or Dev button) -->
+    <aside class="dev-panel" id="dev-panel" hidden></aside>
+  </div>
+
+  <script type="module" src="./dist/main.js?v=7"></script>
+</body>
+</html>

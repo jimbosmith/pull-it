@@ -1,0 +1,20 @@
+{
+  "name": "pull-it",
+  "version": "1.0.0",
+  "description": "Pull It — A short-session 2.5D physics game based on whipping a tablecloth out from underneath objects.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs",
+    "test": "node --test tests/validation.test.ts",
+    "vite:dev": "vite --host",
+    "vite:build": "tsc && vite build",
+    "vite:preview": "vite preview --port 4173",
+    "serve:python": "python -m http.server 8080"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0"
+  }
+}
